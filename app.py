@@ -68,14 +68,26 @@ st.sidebar.caption(f"Model: {config['model_name']}")
 st.sidebar.caption(f"Target: {config['target_column']}")
 
 st.header("Upload Transactions")
-uploaded_file = st.file_uploader("Upload a CSV for fraud scoring", type=["csv"])
+uploaded_file = st.file_uploader(
+    "Upload a transaction CSV file for fraud scoring", type=["csv"]
+)
 st.caption("Upload all training features. Do not include `is_fraud` or `transaction_id`.")
 
 if uploaded_file is None:
-    st.info("Use `data/sample_transactions.csv` to test the dashboard after training.")
+    st.info(
+        "Upload a CSV file to score transactions. "
+        "Use `data/sample_transactions.csv` to test the dashboard."
+    )
     st.stop()
 
-input_df = pd.read_csv(uploaded_file)
+try:
+    input_df = pd.read_csv(uploaded_file)
+except Exception as error:
+    st.error(f"Could not read the uploaded CSV file: {error}")
+    st.stop()
+
+st.success(f"Successfully loaded: {uploaded_file.name}")
+st.caption(f"Transactions uploaded: {len(input_df):,}")
 required_features = config["feature_columns"]
 missing_columns = [column for column in required_features if column not in input_df.columns]
 if missing_columns:
