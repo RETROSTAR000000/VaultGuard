@@ -1,1 +1,1 @@
-"""CreditShield AI source package."""
+"""VaultGuard fraud-detection source package."""
