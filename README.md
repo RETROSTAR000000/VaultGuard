@@ -105,3 +105,7 @@ VaultGuard/
 ## Deployment
 
 Commit the source, requirements, models, and reports to your GitHub repository, then create a Streamlit Community Cloud app using `app.py` as the entry point. Do not commit private customer data, credentials, or production model secrets.
+
+
+For Mac : python3 -m streamlit run app.py
+For Windows : python -m streamlit run app.py
