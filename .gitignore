@@ -180,6 +180,14 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
-# CreditShield AI data artifacts
+# VaultGuard — data & model artefacts
+# Raw training data (large, not needed in GitHub/Streamlit Cloud)
 data/raw/*
 !data/raw/.gitkeep
+data/credit_card_fraud_2026.csv
+
+# Local uv lock (optional — uv.lock can be committed, but isn't required)
+# uv.lock
+
+# Never ignore models/ — Streamlit Cloud needs the .joblib and .json files
+# models/

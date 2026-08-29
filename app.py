@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import json
 from pathlib import Path
@@ -40,6 +40,11 @@ st.set_page_config(
 # ---------------------------------------------------------------------------
 st.markdown("""
 <style>
+/* ── Hide Streamlit chrome (menu, header, footer) ── */
+#MainMenu { visibility: hidden; }
+header    { visibility: hidden; }
+footer    { visibility: hidden; }
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
