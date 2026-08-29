@@ -1,17 +1,26 @@
-﻿# VaultGuard — cross-platform convenience commands
+# VaultGuard — cross-platform convenience commands (delegates to uv)
 # Usage (macOS / Linux):  make setup  |  make train  |  make app
-# Usage (Windows):        use run.bat instead
+# Usage (Windows):        run.bat setup  |  run.bat train  |  run.bat app
+#
+# Requires: uv  (https://docs.astral.sh/uv/)
+# Install:  curl -LsSf https://astral.sh/uv/install.sh | sh
 
-.PHONY: setup train importance app
+.PHONY: setup train importance app notebook clean
 
 setup:
-	pip install -e .
+	uv sync
 
 train:
-	python -m src.train
+	uv run python -m src.train
 
 importance:
-	python -m src.feature_importance
+	uv run python -m src.feature_importance
 
 app:
-	streamlit run app.py
+	uv run streamlit run app.py
+
+notebook:
+	uv run jupyter notebook notebooks/
+
+clean:
+	rm -rf .venv

@@ -33,13 +33,56 @@ The generated permutation-importance chart is saved at `reports/figures/feature_
 
 ## Run locally
 
-```powershell
-python -m venv venv
-venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-python -m src.train
-python -m src.feature_importance
-python -m streamlit run app.py
+All platforms use [**uv**](https://docs.astral.sh/uv/) — a fast Python package manager that handles the
+virtual environment automatically. The scripts below will install `uv` for you if it isn't already present.
+
+### Windows (PowerShell / cmd)
+
+```bat
+run.bat setup       ← create .venv and install all dependencies
+run.bat train       ← train models, save to models/
+run.bat importance  ← generate feature importance report
+run.bat app         ← start the Streamlit app  (default if no arg)
+run.bat notebook    ← open Jupyter
+run.bat clean       ← delete .venv
+```
+
+> **Tip — first run**: just double-click `run.bat` or run `run.bat` with no arguments to go straight to the app. Dependencies are resolved automatically.
+
+### macOS / Linux (including Apple Silicon M4)
+
+```bash
+chmod +x run.sh     # one-time only
+./run.sh setup      # create .venv and install all dependencies
+./run.sh train      # train models, save to models/
+./run.sh importance # generate feature importance report
+./run.sh app        # start the Streamlit app  (default if no arg)
+./run.sh notebook   # open Jupyter
+./run.sh clean      # delete .venv
+```
+
+Or with `make`:
+
+```bash
+make setup
+make train
+make importance
+make app
+```
+
+### Manual (any platform)
+
+```bash
+# install uv once
+curl -LsSf https://astral.sh/uv/install.sh | sh   # macOS/Linux
+# OR (Windows PowerShell)
+irm https://astral.sh/uv/install.ps1 | iex
+
+# then
+uv sync                            # install deps into .venv
+uv run python -m src.train         # train
+uv run python -m src.feature_importance
+uv run streamlit run app.py        # launch app
 ```
 
 Open the local URL shown by Streamlit, select **Fraud Scanner**, and upload `data/sample_transactions.csv`.
